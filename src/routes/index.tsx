@@ -402,6 +402,44 @@ function HomePage() {
       </section>
 
       <section className="container-page py-20">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <SectionHeading
+              eyebrow="Contact"
+              title="Tell us what you want to build"
+              body="Share your idea, timeline and budget. You get a written scope and a fixed price back — no obligation."
+            />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                <Link to="/contact">
+                  Send an enquiry <ArrowRight className="ml-1 size-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/faq">Read the FAQ</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["Email", "hello@codenovastudio.in"],
+              ["Phone", "+91 90000 00000"],
+              ["Hours", "Mon–Sat, 10:00–19:00 IST"],
+              ["Location", "Chennai, India (remote-first)"],
+            ].map(([label, value]) => (
+              <div key={label} className="rounded-xl border border-border bg-card p-5 shadow-card">
+                <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
+                  {label}
+                </p>
+                <p className="mt-2 text-sm font-medium">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-page py-20">
+
         <div className="surface-hero rounded-2xl px-8 py-14 text-center shadow-elevated">
           <h2 className="text-3xl font-semibold">Ready to start your project?</h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
