@@ -264,7 +264,15 @@ function HomePage() {
             </Card>
           ))}
         </div>
+        <div className="mt-8">
+          <Button asChild variant="outline">
+            <Link to="/services">
+              View all services <ArrowRight className="ml-1 size-4" />
+            </Link>
+          </Button>
+        </div>
       </section>
+
 
       <section className="bg-muted/50 border-y border-border py-20">
         <div className="container-page">
