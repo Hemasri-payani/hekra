@@ -157,7 +157,7 @@ export async function verifyPaymentForUser(data: VerifyInput, userId: string) {
 
   await supabaseAdmin
     .from("orders")
-    .update({ payment_status: "successful", status: "confirmed" })
+    .update({ payment_status: "successful", status: "order_confirmed" })
     .eq("id", order.id);
 
   await supabaseAdmin.from("notifications").insert({
