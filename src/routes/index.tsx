@@ -210,11 +210,47 @@ function HomePage() {
       </section>
 
       <section className="container-page py-20">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <SectionHeading
+              eyebrow="About us"
+              title="A senior engineering team, not a template shop"
+              body="Codenova Studio is a custom software studio building production systems for founders, clinics, retailers and operations teams across India. Every engagement is architected, reviewed and handed over by senior engineers."
+            />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild>
+                <Link to="/about">
+                  More about us <ArrowRight className="ml-1 size-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/services">Explore services</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["8+ years", "Average engineering experience on every project"],
+              ["120+", "Products shipped to production"],
+              ["1 working day", "Typical response time on new enquiries"],
+              ["100% ownership", "Source code, schema and docs handed to you"],
+            ].map(([value, label]) => (
+              <div key={label} className="rounded-xl border border-border bg-card p-5 shadow-card">
+                <p className="text-primary text-xl font-semibold">{value}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-page py-20">
         <SectionHeading
           eyebrow="Services"
           title="Everything you need under one engineering team"
           body="From a first landing page to a scaled internal platform, we cover the full delivery lifecycle."
         />
+
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service) => (
             <Card key={service.title} className="shadow-card transition-shadow hover:shadow-elevated">
@@ -228,7 +264,15 @@ function HomePage() {
             </Card>
           ))}
         </div>
+        <div className="mt-8">
+          <Button asChild variant="outline">
+            <Link to="/services">
+              View all services <ArrowRight className="ml-1 size-4" />
+            </Link>
+          </Button>
+        </div>
       </section>
+
 
       <section className="bg-muted/50 border-y border-border py-20">
         <div className="container-page">
@@ -358,6 +402,44 @@ function HomePage() {
       </section>
 
       <section className="container-page py-20">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <SectionHeading
+              eyebrow="Contact"
+              title="Tell us what you want to build"
+              body="Share your idea, timeline and budget. You get a written scope and a fixed price back — no obligation."
+            />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                <Link to="/contact">
+                  Send an enquiry <ArrowRight className="ml-1 size-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/faq">Read the FAQ</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["Email", "hello@codenovastudio.in"],
+              ["Phone", "+91 90000 00000"],
+              ["Hours", "Mon–Sat, 10:00–19:00 IST"],
+              ["Location", "Chennai, India (remote-first)"],
+            ].map(([label, value]) => (
+              <div key={label} className="rounded-xl border border-border bg-card p-5 shadow-card">
+                <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
+                  {label}
+                </p>
+                <p className="mt-2 text-sm font-medium">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-page py-20">
+
         <div className="surface-hero rounded-2xl px-8 py-14 text-center shadow-elevated">
           <h2 className="text-3xl font-semibold">Ready to start your project?</h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
