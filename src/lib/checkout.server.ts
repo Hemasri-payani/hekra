@@ -147,7 +147,7 @@ export async function verifyPaymentForUser(data: VerifyInput, userId: string) {
   await supabaseAdmin
     .from("payments")
     .update({
-      status: "paid",
+      status: "successful",
       gateway_payment_id: data.razorpayPaymentId,
       gateway_signature: data.razorpaySignature,
       paid_at: paidAt,
@@ -157,7 +157,7 @@ export async function verifyPaymentForUser(data: VerifyInput, userId: string) {
 
   await supabaseAdmin
     .from("orders")
-    .update({ payment_status: "paid", status: "confirmed" })
+    .update({ payment_status: "successful", status: "confirmed" })
     .eq("id", order.id);
 
   await supabaseAdmin.from("notifications").insert({
