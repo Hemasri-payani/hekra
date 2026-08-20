@@ -103,8 +103,11 @@ function PackageDetailPage() {
           </CardHeader>
           <CardContent className="space-y-3">
             <Button asChild className="w-full">
-              <Link to="/register">Get started</Link>
+              <Link to="/checkout/$slug" params={{ slug: pkg.slug }}>
+                Get started
+              </Link>
             </Button>
+
             <Button asChild variant="outline" className="w-full">
               <Link to="/contact">Ask a question</Link>
             </Button>
