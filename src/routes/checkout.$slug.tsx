@@ -51,7 +51,21 @@ function loadRazorpay(): Promise<boolean> {
 function CheckoutPage() {
   const { slug } = Route.useParams();
   const navigate = useNavigate();
-  const { user, profile, loading } = useSession();
+  const { user, loading } = useSession();
+
+  const { data: profile } = useQuery({
+    queryKey: ["profile", user?.id],
+    enabled: Boolean(user?.id),
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("full_name, phone, company")
+        .eq("id", user!.id)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+  });
   const [submitting, setSubmitting] = useState(false);
 
   const createOrder = useServerFn(createCheckoutOrder);
