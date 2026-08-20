@@ -20,7 +20,9 @@ export const Route = createFileRoute("/register")({
       },
       { property: "og:title", content: "Create account — Codenova Studio" },
       { property: "og:description", content: "Start your custom software project today." },
+      { property: "og:url", content: "https://hekra.lovable.app/register" },
     ],
+    links: [{ rel: "canonical", href: "https://hekra.lovable.app/register" }],
   }),
   component: RegisterPage,
 });

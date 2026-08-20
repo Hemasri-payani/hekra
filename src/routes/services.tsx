@@ -19,7 +19,9 @@ export const Route = createFileRoute("/services")({
         property: "og:description",
         content: "Full-stack software services from discovery to deployment.",
       },
+      { property: "og:url", content: "https://hekra.lovable.app/services" },
     ],
+    links: [{ rel: "canonical", href: "https://hekra.lovable.app/services" }],
   }),
   component: ServicesPage,
 });

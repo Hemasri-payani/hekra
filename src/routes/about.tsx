@@ -17,7 +17,9 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "A custom software development team focused on transparent, production-grade delivery.",
       },
+      { property: "og:url", content: "https://hekra.lovable.app/about" },
     ],
+    links: [{ rel: "canonical", href: "https://hekra.lovable.app/about" }],
   }),
   component: AboutPage,
 });

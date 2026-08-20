@@ -43,7 +43,9 @@ export const Route = createFileRoute("/")({
         content:
           "Professional custom software development solutions designed around your business, ideas and requirements.",
       },
+      { property: "og:url", content: "https://hekra.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://hekra.lovable.app/" }],
   }),
   component: HomePage,
 });

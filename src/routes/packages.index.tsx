@@ -23,7 +23,9 @@ export const Route = createFileRoute("/packages/")({
         property: "og:description",
         content: "Fixed-price custom software packages with clear scope and support.",
       },
+      { property: "og:url", content: "https://hekra.lovable.app/packages" },
     ],
+    links: [{ rel: "canonical", href: "https://hekra.lovable.app/packages" }],
   }),
   component: PackagesPage,
 });
