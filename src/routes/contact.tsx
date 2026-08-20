@@ -24,7 +24,9 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "Get in touch with the Codenova Studio engineering team.",
       },
+      { property: "og:url", content: "https://hekra.lovable.app/contact" },
     ],
+    links: [{ rel: "canonical", href: "https://hekra.lovable.app/contact" }],
   }),
   component: ContactPage,
 });

@@ -10,7 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { formatINR } from "@/lib/format";
 
 export const Route = createFileRoute("/packages/$slug")({
-  head: () => ({
+  head: ({ params }) => ({
     meta: [
       { title: "Package details — Codenova Studio" },
       {
@@ -23,7 +23,9 @@ export const Route = createFileRoute("/packages/$slug")({
         property: "og:description",
         content: "Scope, deliverables and pricing for this development package.",
       },
+      { property: "og:url", content: `https://hekra.lovable.app/packages/${params.slug}` },
     ],
+    links: [{ rel: "canonical", href: `https://hekra.lovable.app/packages/${params.slug}` }],
   }),
   component: PackageDetailPage,
 });

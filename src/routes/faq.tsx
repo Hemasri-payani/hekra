@@ -23,7 +23,9 @@ export const Route = createFileRoute("/faq")({
         property: "og:description",
         content: "Common questions about working with Codenova Studio.",
       },
+      { property: "og:url", content: "https://hekra.lovable.app/faq" },
     ],
+    links: [{ rel: "canonical", href: "https://hekra.lovable.app/faq" }],
   }),
   component: FaqPage,
 });

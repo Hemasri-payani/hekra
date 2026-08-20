@@ -19,7 +19,9 @@ export const Route = createFileRoute("/login")({
       },
       { property: "og:title", content: "Log in — Codenova Studio" },
       { property: "og:description", content: "Access your Codenova Studio dashboard." },
+      { property: "og:url", content: "https://hekra.lovable.app/login" },
     ],
+    links: [{ rel: "canonical", href: "https://hekra.lovable.app/login" }],
   }),
   component: LoginPage,
 });
