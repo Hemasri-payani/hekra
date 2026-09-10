@@ -7,7 +7,7 @@ import {
   Check,
   Database,
   Globe,
-  Quote,
+  
   Smartphone,
   Workflow,
   ShieldCheck,
@@ -91,23 +91,6 @@ const PROCESS = [
   { step: "05", title: "Deploy", body: "Production setup, monitoring and handover documentation." },
 ];
 
-const REVIEWS = [
-  {
-    name: "Anitha R.",
-    role: "Founder, Retail startup",
-    body: "They shipped our ordering portal in three weeks and the admin dashboard alone saves us a day of work every week.",
-  },
-  {
-    name: "Karthik S.",
-    role: "Operations Head",
-    body: "Clear scope, clear pricing, no surprises. The tracking page meant I always knew what stage we were at.",
-  },
-  {
-    name: "Meera J.",
-    role: "Clinic Owner",
-    body: "Our appointment system finally fits how we actually work. Support after launch was genuinely responsive.",
-  },
-];
 
 const FAQS = [
   {
@@ -177,18 +160,6 @@ function HomePage() {
                 <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
-            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6">
-              {[
-                ["120+", "Projects delivered"],
-                ["4.9/5", "Client rating"],
-                ["₹1,000", "Starting price"],
-              ].map(([value, label]) => (
-                <div key={label}>
-                  <dt className="text-2xl font-semibold">{value}</dt>
-                  <dd className="text-xs text-ink-muted">{label}</dd>
-                </div>
-              ))}
-            </dl>
           </div>
 
           <div className="fade-up hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur lg:block">
@@ -212,38 +183,24 @@ function HomePage() {
       </section>
 
       <section className="container-page py-20">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <SectionHeading
-              eyebrow="About us"
-              title="A senior engineering team, not a template shop"
-              body="Codenova Studio is a custom software studio building production systems for founders, clinics, retailers and operations teams across India. Every engagement is architected, reviewed and handed over by senior engineers."
-            />
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild>
-                <Link to="/about">
-                  More about us <ArrowRight className="ml-1 size-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link to="/services">Explore services</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              ["8+ years", "Average engineering experience on every project"],
-              ["120+", "Products shipped to production"],
-              ["1 working day", "Typical response time on new enquiries"],
-              ["100% ownership", "Source code, schema and docs handed to you"],
-            ].map(([value, label]) => (
-              <div key={label} className="rounded-xl border border-border bg-card p-5 shadow-card">
-                <p className="text-primary text-xl font-semibold">{value}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{label}</p>
-              </div>
-            ))}
+        <div>
+          <SectionHeading
+            eyebrow="About us"
+            title="A senior engineering team, not a template shop"
+            body="Codenova Studio is a custom software studio building production systems for founders, clinics, retailers and operations teams. Every engagement is architected, reviewed and handed over by senior engineers, with the full source code, database schema and documentation yours at the end."
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild>
+              <Link to="/about">
+                More about us <ArrowRight className="ml-1 size-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/services">Explore services</Link>
+            </Button>
           </div>
         </div>
+
       </section>
 
       <section className="container-page py-20">
@@ -373,21 +330,6 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="container-page py-20">
-        <SectionHeading eyebrow="Reviews" title="What our clients say" />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {REVIEWS.map((review) => (
-            <Card key={review.name} className="shadow-card">
-              <CardContent className="pt-6">
-                <Quote className="text-primary size-6" />
-                <p className="mt-4 text-sm">{review.body}</p>
-                <p className="mt-6 text-sm font-medium">{review.name}</p>
-                <p className="text-xs text-muted-foreground">{review.role}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
 
       <section className="bg-muted/50 border-y border-border py-20">
         <div className="container-page max-w-3xl">
