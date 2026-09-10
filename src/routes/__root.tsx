@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Header } from "../components/site/Header";
+import { ChatWidget } from "../components/site/ChatWidget";
 import { Toaster } from "../components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -132,6 +133,7 @@ function RootComponent() {
       <Header />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <ChatWidget />
       <Toaster />
     </QueryClientProvider>
   );
