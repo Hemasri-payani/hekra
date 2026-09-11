@@ -3,6 +3,7 @@ import { MessageSquare, Send, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -15,7 +16,7 @@ const GREETING: ChatMessage = {
 
 const SUGGESTIONS = [
   "Which package fits a small booking website?",
-  "How long does a mobile app take?",
+  "What's the status of my order?",
   "What do you need from me to start?",
 ];
 
@@ -45,9 +46,14 @@ export function ChatWidget() {
     setBusy(true);
 
     try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
       const response = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify({ messages: next }),
       });
 
@@ -71,7 +77,7 @@ export function ChatWidget() {
           {
             role: "assistant",
             content:
-              "Sorry, I couldn't put an answer together. Could you rephrase, or reach us at hello@codenovastudio.in?",
+              "Sorry, I couldn't put an answer together. Could you rephrase, or reach us at hemasripayani@gmail.com?",
           },
         ]);
       }

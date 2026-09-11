@@ -39,7 +39,7 @@ function AdminPage() {
   const { data: isAdmin, isLoading: roleLoading } = useIsAdmin(user);
 
   useEffect(() => {
-    if (!loading && !user) navigate({ to: "/login", replace: true });
+    if (!loading && !user) navigate({ to: "/admin-login", replace: true });
   }, [loading, user, navigate]);
 
   const { data: orders, isLoading } = useQuery({

@@ -366,8 +366,8 @@ function HomePage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              ["Email", "hello@codenovastudio.in"],
-              ["Phone", "+91 90000 00000"],
+              ["Email", "hemasripayani@gmail.com"],
+              ["Phone", "+91 94407 76913"],
               ["Hours", "Mon–Sat, 10:00–19:00 IST"],
               ["Location", "Chennai, India (remote-first)"],
             ].map(([label, value]) => (

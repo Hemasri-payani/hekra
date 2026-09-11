@@ -89,10 +89,10 @@ function ContactPage() {
           </CardHeader>
           <CardContent className="space-y-4 text-sm text-muted-foreground">
             <p className="flex items-center gap-3">
-              <Mail className="text-primary size-4" /> hello@codenova.studio
+              <Mail className="text-primary size-4" /> hemasripayani@gmail.com
             </p>
             <p className="flex items-center gap-3">
-              <Phone className="text-primary size-4" /> +91 90000 00000
+              <Phone className="text-primary size-4" /> +91 94407 76913
             </p>
             <p className="flex items-center gap-3">
               <MapPin className="text-primary size-4" /> Chennai, India
