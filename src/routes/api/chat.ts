@@ -113,6 +113,12 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("AI is not configured", { status: 500 });
         }
 
+        const authHeader = request.headers.get("Authorization") ?? "";
+        const accessToken = authHeader.toLowerCase().startsWith("bearer ")
+          ? authHeader.slice(7).trim()
+          : undefined;
+        const liveContext = await buildLiveContext(accessToken);
+
         const upstream = await fetch("https://ai.gateway.lovable.dev/v1/responses", {
           method: "POST",
           headers: {
@@ -122,7 +128,7 @@ export const Route = createFileRoute("/api/chat")({
           },
           body: JSON.stringify({
             model: "openai/gpt-6-astra",
-            instructions: SYSTEM_PROMPT,
+            instructions: `${SYSTEM_PROMPT}\n\nLIVE DATA (authoritative, from the live database — prefer it over anything else):\n${liveContext}`,
             input: messages.map((m) => ({
               role: m.role,
               content: [
