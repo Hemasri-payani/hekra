@@ -71,7 +71,7 @@ export function ChatWidget() {
           {
             role: "assistant",
             content:
-              "Sorry, I couldn't put an answer together. Could you rephrase, or reach us at hello@codenovastudio.in?",
+              "Sorry, I couldn't put an answer together. Could you rephrase, or reach us at hemasripayani@gmail.com?",
           },
         ]);
       }
