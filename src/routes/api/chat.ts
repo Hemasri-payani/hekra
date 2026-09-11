@@ -1,6 +1,85 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { createClient } from "@supabase/supabase-js";
+
+import type { Database } from "@/integrations/supabase/types";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
+
+function supabaseFor(accessToken?: string) {
+  const url = process.env["SUPABASE_URL"]!;
+  const key = process.env["SUPABASE_PUBLISHABLE_KEY"]!;
+  return createClient<Database>(url, key, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      fetch: (input, init) => {
+        const headers = new Headers(init?.headers);
+        headers.set("apikey", key);
+        if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
+        else headers.delete("Authorization");
+        return fetch(input, { ...init, headers });
+      },
+    },
+  });
+}
+
+async function buildLiveContext(accessToken?: string): Promise<string> {
+  const parts: string[] = [];
+  try {
+    const anon = supabaseFor();
+    const { data: packages } = await anon
+      .from("packages")
+      .select("name, slug, tagline, price_inr, scope, support, features")
+      .eq("is_active", true)
+      .order("sort_order");
+    if (packages?.length) {
+      parts.push(
+        "Live packages (prices in INR, 18% GST added at checkout):\n" +
+          packages
+            .map(
+              (p) =>
+                `- ${p.name} (/packages/${p.slug}) — Rs. ${p.price_inr}. ${p.tagline}. Scope: ${p.scope}. Support: ${p.support}. Includes: ${(p.features ?? []).join("; ")}`,
+            )
+            .join("\n"),
+      );
+    }
+  } catch {
+    // live package data unavailable; continue without it
+  }
+
+  if (accessToken) {
+    try {
+      const user = supabaseFor(accessToken);
+      const { data: orders } = await user
+        .from("orders")
+        .select(
+          "order_number, status, payment_status, total_amount, created_at, packages(name), projects(project_name, progress)",
+        )
+        .order("created_at", { ascending: false })
+        .limit(10);
+      if (orders?.length) {
+        parts.push(
+          "The signed-in visitor's own orders (share these freely with them):\n" +
+            orders
+              .map(
+                (o) =>
+                  `- ${o.order_number}: ${o.packages?.name ?? "package"}, order status ${o.status}, payment ${o.payment_status}, total Rs. ${o.total_amount}, placed ${new Date(o.created_at).toDateString()}${o.projects ? `, project "${o.projects.project_name}" ${o.projects.progress}% complete` : ""}`,
+              )
+              .join("\n"),
+        );
+      } else {
+        parts.push("The visitor is signed in but has no orders yet.");
+      }
+    } catch {
+      // order lookup failed; continue without it
+    }
+  } else {
+    parts.push(
+      "The visitor is NOT signed in, so you cannot see any orders. If they ask about order status, ask them to sign in at /login and reopen the chat.",
+    );
+  }
+
+  return parts.join("\n\n");
+}
 
 const SYSTEM_PROMPT = `You are the Codenova Studio assistant, a helpful assistant on the website of a custom software development studio.
 
@@ -9,7 +88,7 @@ About Codenova Studio:
 - Fixed-scope, fixed-price packages starting at Rs. 1,000, purchased online with secure payment.
 - Process: Discovery, Design, Build (weekly reviewable increments), Test, Deploy.
 - Customers get a dashboard with live order/project tracking, and full ownership of source code, database schema and deployment docs.
-- Contact: hello@codenovastudio.in, +91 90000 00000, Mon-Sat 10:00-19:00 IST, Chennai, India (remote-first).
+- Contact: hemasripayani@gmail.com, +91 94407 76913, Mon-Sat 10:00-19:00 IST, Chennai, India (remote-first).
 - Site pages: /packages, /services, /about, /faq, /contact, /register, /login, /dashboard.
 
 Guidance:
