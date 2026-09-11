@@ -16,7 +16,7 @@ const GREETING: ChatMessage = {
 
 const SUGGESTIONS = [
   "Which package fits a small booking website?",
-  "How long does a mobile app take?",
+  "What's the status of my order?",
   "What do you need from me to start?",
 ];
 
